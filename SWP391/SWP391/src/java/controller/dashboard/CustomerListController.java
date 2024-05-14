@@ -16,13 +16,13 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author tungl
  */
-@WebServlet(name = "CustomerListController", urlPatterns = {"/CustomerList"})
+@WebServlet(name = "CustomerListController", urlPatterns = {"/customerList"})
 public class CustomerListController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        request.getRequestDispatcher("viewsAdmin/viewCustomer.jsp").forward(request, response);
     }
 
     @Override

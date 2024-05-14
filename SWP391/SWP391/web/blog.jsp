@@ -137,7 +137,7 @@
                                                 <a href="#0"><img src="${last.main_img}" alt=""></a>
                                             </div>
                                             <small>${last.blogCategory.name} - ${last.modified_at}</small>
-                                            <h3><a href="#" title="">${last.getShort()}</a></h3>
+                                            <h3><a href="#" title="">${last.title}</a></h3>
                                         </li>
                                     </c:forEach>
                                 </ul>
