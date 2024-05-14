@@ -135,10 +135,11 @@
                                 </div>
                                 <ul class="cats">
                                     <ul class="cats">
+                                        <li><a href="blogs?cate=">All<span></span></a></li>
                                         <c:forEach var="entry" items="${listBlogCategoriess}">
                                             <c:set var="category" value="${entry.key}" />
                                             <c:set var="blogs" value="${entry.value}" />
-                                            <li><a href="#"><c:out value="${category.name}" /> <span>(<c:out value="${fn:length(blogs)}" />)</span></a></li>
+                                            <li><a href="blogs?cate=${category.id}"><c:out value="${category.name}" /> <span>(<c:out value="${fn:length(blogs)}" />)</span></a></li>
                                             </c:forEach>
                                     </ul>
 

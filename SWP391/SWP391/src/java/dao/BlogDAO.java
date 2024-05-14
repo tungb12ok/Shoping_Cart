@@ -57,7 +57,9 @@ public class BlogDAO extends DBContext {
 
     public List<Blog> getAllBlog(int currentPage, int limitSize) {
         List<Blog> list = new ArrayList<>();
+        // Edit query with other entity
         String query = "SELECT id, user_id, blog_cate_id, title, content, cover_img, main_img, description, created_at, modified_at "
+                // Select total of blog
                 + "FROM (SELECT ROW_NUMBER() OVER (ORDER BY created_at DESC) AS RowNum, * FROM blogs) AS RowConstrainedResult "
                 + "WHERE RowNum > ? AND RowNum <= ?";
         try (PreparedStatement st = connection.prepareStatement(query)) {
@@ -116,7 +118,7 @@ public class BlogDAO extends DBContext {
         return blog;
     }
 
-    public List<Blog> filterBlog(String title, List<Tag> listTag) {
+    public List<Blog> filterBlog(String title, List<Tag> listTag, Integer categoryId) {
         List<Blog> filteredBlogs = new ArrayList<>();
         StringBuilder queryBuilder = new StringBuilder("SELECT id, user_id, blog_cate_id, title, content, cover_img, main_img, description, created_at, modified_at FROM blogs WHERE 1 = 1");
 
@@ -135,6 +137,10 @@ public class BlogDAO extends DBContext {
             queryBuilder.append("))");
         }
 
+        if (categoryId != null) {
+            queryBuilder.append(" AND blog_cate_id = ?");
+        }
+
         try (PreparedStatement statement = connection.prepareStatement(queryBuilder.toString())) {
             int parameterIndex = 1;
             if (title != null) {
@@ -144,6 +150,9 @@ public class BlogDAO extends DBContext {
                 for (Tag tag : listTag) {
                     statement.setInt(parameterIndex++, tag.getId());
                 }
+            }
+            if (categoryId != null) {
+                statement.setInt(parameterIndex++, categoryId);
             }
 
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -172,7 +181,7 @@ public class BlogDAO extends DBContext {
     }
 
     public Map<BlogCategories, List<Blog>> getBlogsByCategory() {
-        Map<BlogCategories, List<Blog>> blogMap = new HashMap<>();
+        Map<Integer, List<Blog>> blogMap = new HashMap<>();
         String query = "SELECT id, user_id, blog_cate_id, title, content, cover_img, main_img, description, created_at, modified_at FROM blogs";
         try (PreparedStatement st = connection.prepareStatement(query); ResultSet resultSet = st.executeQuery()) {
             while (resultSet.next()) {
@@ -188,34 +197,44 @@ public class BlogDAO extends DBContext {
                 p.setCreated_at(resultSet.getDate("created_at"));
                 p.setModified_at(resultSet.getDate("modified_at"));
 
-                BlogCategories blogCategory = new BlogCategoriesDAO().getByID(resultSet.getInt("blog_cate_id"));
+                int categoryId = resultSet.getInt("blog_cate_id");
 
-                // Add the blog to the list of blogs for the category
-                List<Blog> blogsForCategory = blogMap.getOrDefault(blogCategory, new ArrayList<>());
-                blogsForCategory.add(p);
-                blogMap.put(blogCategory, blogsForCategory);
+                // Kiểm tra xem danh mục đã tồn tại trong HashMap chưa
+                if (!blogMap.containsKey(categoryId)) {
+                    // Nếu không, tạo một danh sách mới cho danh mục
+                    blogMap.put(categoryId, new ArrayList<>());
+                }
+                // Thêm bài viết vào danh sách bài viết cho danh mục
+                blogMap.get(categoryId).add(p);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return blogMap;
+
+        // Chuyển đổi danh sách bài viết của từng danh mục thành danh mục thực tế và trả về
+        Map<BlogCategories, List<Blog>> result = new HashMap<>();
+        for (Map.Entry<Integer, List<Blog>> entry : blogMap.entrySet()) {
+            BlogCategories blogCategory = new BlogCategoriesDAO().getByID(entry.getKey());
+            result.put(blogCategory, entry.getValue());
+        }
+
+        return result;
     }
 
     public static void main(String[] args) {
         BlogDAO bDAO = new BlogDAO();
-//        Map<BlogCategories, List<Blog>> blogMap = bDAO.getBlogsByCategory();
-//        
-//        System.out.println(blogMap.size());
-//        
-//        for (Map.Entry<BlogCategories, List<Blog>> entry : blogMap.entrySet()) {
-//            BlogCategories category = entry.getKey();
-//            List<Blog> blogs = entry.getValue();
-//
-//            System.out.println("Category: " + category.getName());
-//            System.out.println("Size: " + blogs.size());
-//
-//        }
+        Map<BlogCategories, List<Blog>> blogMap = bDAO.getBlogsByCategory();
 
-        System.out.println(bDAO.getAllBlog(2, 1));
+        System.out.println(blogMap.size());
+
+        for (Map.Entry<BlogCategories, List<Blog>> entry : blogMap.entrySet()) {
+            BlogCategories category = entry.getKey();
+            List<Blog> blogs = entry.getValue();
+
+            System.out.println("Category: " + category.getName());
+            System.out.println("Size: " + blogs.size());
+
+        }
+
     }
 }

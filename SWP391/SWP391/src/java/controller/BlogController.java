@@ -5,6 +5,7 @@
 package controller;
 
 import controller.dashboard.*;
+import dao.BlogCategoriesDAO;
 import dao.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Blog;
+import model.BlogCategories;
 import model.Pagination;
 
 /**
@@ -29,17 +31,25 @@ public class BlogController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         BlogDAO bDAO = new BlogDAO();
+        BlogCategoriesDAO blogCDAO = new BlogCategoriesDAO();
         HttpSession session = request.getSession();
+        // start param
         String search = request.getParameter("search");
-
+        String cate = request.getParameter("cate");
+        // end param
         List<Blog> list = bDAO.getAllBlog(null);
+
         session.setAttribute("listBlogCategoriess", bDAO.getBlogsByCategory());
+        session.setAttribute("listCate", blogCDAO.getAll());
         session.setAttribute("listLastBlog", bDAO.getAllBlog(3));
         if (search != null) {
-            request.setAttribute("listBlog", bDAO.filterBlog(search, null));
+            request.setAttribute("listBlog", bDAO.filterBlog(search, null, null));
+        }
+        if (cate != null) {
+            request.setAttribute("listBlog", bDAO.filterBlog(search, null, Integer.parseInt(cate)));
         }
 
-        // pagging
+        // start pagging
         int limitPage = 1;
         if (request.getParameter("cp") == null) {
             Pagination Page = new Pagination(list, limitPage, 1);
@@ -56,6 +66,7 @@ public class BlogController extends HttpServlet {
         }
         // set URL
         request.setAttribute("pagging", "blogs");
+        // end pagging
         request.setAttribute("listBlog", list);
 
         request.getRequestDispatcher("blog.jsp").forward(request, response);
