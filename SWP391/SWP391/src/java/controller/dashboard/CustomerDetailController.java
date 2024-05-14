@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.User;
 
 /**
  *
@@ -25,7 +26,18 @@ public class CustomerDetailController extends HttpServlet {
             throws ServletException, IOException {
         UserDAO uDAO = new UserDAO();
         
-        request.setAttribute("listUser", uDAO.getAllUsers());
+         String idRaw = request.getParameter("id");
+
+        try {
+            int id = Integer.parseInt(idRaw);
+            User b = uDAO.getUserById(id);
+            if (b == null) {
+                response.sendRedirect("Error.jsp");
+            }
+            request.setAttribute("u", b);
+        } catch (Exception e) {
+            response.sendRedirect("Error.jsp");
+        }
         request.getRequestDispatcher("viewsAdmin/customerDetail.jsp").forward(request, response);
     }
 

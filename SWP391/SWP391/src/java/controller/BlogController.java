@@ -14,6 +14,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.Blog;
+import model.Pagination;
 
 /**
  *
@@ -29,12 +32,32 @@ public class BlogController extends HttpServlet {
         HttpSession session = request.getSession();
         String search = request.getParameter("search");
 
-        request.setAttribute("listBlog", bDAO.getAllBlog(null));
+        List<Blog> list = bDAO.getAllBlog(null);
         session.setAttribute("listBlogCategoriess", bDAO.getBlogsByCategory());
         session.setAttribute("listLastBlog", bDAO.getAllBlog(3));
         if (search != null) {
             request.setAttribute("listBlog", bDAO.filterBlog(search, null));
         }
+
+        // pagging
+        int limitPage = 1;
+        if (request.getParameter("cp") == null) {
+            Pagination Page = new Pagination(list, limitPage, 1);
+            Pagination<Blog> pagination = new Pagination<>(list, limitPage, 1);
+            list = pagination.getItemsOnPage();
+            session.setAttribute("page", Page);
+            request.setAttribute("list", pagination.getItemsOnPage());
+        } else if (request.getParameter("cp") != null) {
+            int cp = Integer.parseInt(request.getParameter("cp"));
+            Pagination Page = new Pagination(list, limitPage, cp);
+            Pagination<Blog> pagination = new Pagination<>(list, limitPage, cp);
+            list = pagination.getItemsOnPage();
+            session.setAttribute("page", Page);
+        }
+        // set URL
+        request.setAttribute("pagging", "blogs");
+        request.setAttribute("listBlog", list);
+
         request.getRequestDispatcher("blog.jsp").forward(request, response);
     }
 

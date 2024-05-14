@@ -103,11 +103,6 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <div>
-                                            <button class="inline-block focus:outline-none bg-brand-500 mt-1 text-white hover:bg-brand-600 hover:text-white  text-md font-medium py-2 px-4 rounded">
-                                                Add product
-                                            </button>
-                                        </div>
                                     </div>
 
                                     <div id="myTabContent">
@@ -115,25 +110,25 @@
                                             <div class="grid grid-cols-1 p-0 md:p-4">
                                                 <div class="sm:-mx-6 lg:-mx-8">
                                                     <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
-                                                        <table class="w-full">
+                                                        <table id="userTable" class="w-full">
                                                             <thead class="bg-gray-50 dark:bg-gray-700/20">
                                                                 <tr>
-                                                                    <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
+                                                                    <th scope="col" data-sort="number" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                         CustomerId
                                                                     </th>
-                                                                    <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
+                                                                    <th scope="col" data-sort="text" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                         FullName
                                                                     </th>
-                                                                    <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
+                                                                    <th scope="col" data-sort="text" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                         Gender
                                                                     </th>
-                                                                    <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
+                                                                    <th scope="col" data-sort="text" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                         Email
                                                                     </th>
-                                                                    <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
+                                                                    <th scope="col" data-sort="number" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                         PhoneNumber
                                                                     </th>
-                                                                    <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
+                                                                    <th scope="col" data-sort="text" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                         Status
                                                                     </th>
                                                                     <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
@@ -142,37 +137,45 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <!-- 1 -->
-                                                                <tr class="bg-white border-b border-dashed dark:bg-gray-900 dark:border-gray-700/40">
-                                                                    <td class="p-3 text-sm font-medium whitespace-nowrap dark:text-white">
-                                                                        
-                                                                    </td>
-                                                                    <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                                                        <div class="flex items-center">
-                                                                            <img src="assets/images/users/avatar-2.png" alt="" class="me-2 h-8 inline-block">
-                                                                            <div class="self-center">                                                                        
-                                                                                <h5 class="text-sm font-semibold text-slate-700 dark:text-gray-400">Merri Diamond</h5>
-                                                                                <span class="block  font-medium text-slate-500">New York USA</span>
+                                                                <c:forEach var="u" items="${listUser}">
+                                                                    <!-- 1 -->
+                                                                    <tr class="bg-white border-b border-dashed dark:bg-gray-900 dark:border-gray-700/40">
+                                                                        <td class="p-3 text-sm font-medium whitespace-nowrap dark:text-white">
+                                                                            ${u.id}
+                                                                        </td>
+                                                                        <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                                            <div class="flex items-center">
+                                                                                <img src="assets/images/users/avatar-2.png" alt="" class="me-2 h-8 inline-block">
+                                                                                <div class="self-center">                                                                        
+                                                                                    <h5 class="text-sm font-semibold text-slate-700 dark:text-gray-400">${u.firstName} ${u.lastName}</h5>
+                                                                                    <span class="block  font-medium text-slate-500">Việt Nam</span>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                                                        <a href="#">exemple@gmail.com</a>
-                                                                    </td>
-                                                                    <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                                                        <span class="bg-green-600/5 text-green-600 text-[11px] font-medium px-2.5 py-0.5 rounded h-5">Active</span>
-                                                                    </td>                                                                    
-                                                                    <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                                                        14 Jan 2023
-                                                                    </td>
-                                                                    <td class="p-3 font-semibold text-lg text-gray-800 whitespace-nowrap dark:text-gray-400">
-                                                                        $1255
-                                                                    </td>
-                                                                    <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                                                        <a href="#"><i class="icofont-ui-edit text-lg text-gray-500 dark:text-gray-400"></i></a>
-                                                                        <a href="#"><i class="icofont-ui-delete text-lg text-red-500 dark:text-red-400"></i></a>
-                                                                    </td>
-                                                                </tr>
+                                                                        </td>
+                                                                        <td class="p-3 font-semibold text-lg text-gray-800 whitespace-nowrap dark:text-gray-400">
+                                                                            ${u.gender?"Male":"Female"}
+                                                                        </td>
+                                                                        <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                                            <a href="#">${u.email}</a>
+                                                                        </td>
+                                                                        <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                                            ${u.telephone}
+                                                                        </td>
+                                                                        <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                                            <c:if test="${u.statusId == 1}">
+                                                                                <span class="bg-green-600/5 text-green-600 text-[11px] font-medium px-2.5 py-0.5 rounded h-5">Active</span>
+                                                                            </c:if>
+                                                                            <c:if test="${u.statusId != 1}">
+                                                                                <span class="bg-red-600/5 text-red-600 text-[11px] font-medium px-2.5 py-0.5 rounded h-5">InActive</span>
+                                                                            </c:if>
+                                                                        </td>                                                                    
+                                                                        <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                                            <a href="customerDetail?id=${u.id}"><i class="icofont-ui-edit text-lg text-gray-500 dark:text-gray-400"></i></a>
+                                                                            <a href="#"><i class="icofont-ui-delete text-lg text-red-500 dark:text-red-400"></i></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </c:forEach>
+
                                                             </tbody>
                                                         </table>
                                                     </div><!--end div-->
@@ -249,5 +252,7 @@
         <script src="viewsAdmin/assets/js/pages/analytics-index.init.js"></script>
         <script src="viewsAdmin/assets/js/app.js"></script>
         <!-- JAVASCRIPTS -->
+        <script src="${pageContext.request.contextPath}/js/dataTable.js"></script>
+      
     </body>
 </html>

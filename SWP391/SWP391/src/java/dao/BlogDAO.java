@@ -55,6 +55,39 @@ public class BlogDAO extends DBContext {
         return list;
     }
 
+    public List<Blog> getAllBlog(int currentPage, int limitSize) {
+        List<Blog> list = new ArrayList<>();
+        String query = "SELECT id, user_id, blog_cate_id, title, content, cover_img, main_img, description, created_at, modified_at "
+                + "FROM (SELECT ROW_NUMBER() OVER (ORDER BY created_at DESC) AS RowNum, * FROM blogs) AS RowConstrainedResult "
+                + "WHERE RowNum > ? AND RowNum <= ?";
+        try (PreparedStatement st = connection.prepareStatement(query)) {
+            int offset = (currentPage - 1) * limitSize;
+            st.setInt(1, offset);
+            st.setInt(2, offset + limitSize);
+            try (ResultSet resultSet = st.executeQuery()) {
+                while (resultSet.next()) {
+                    Blog p = new Blog();
+                    p.setId(resultSet.getInt("id"));
+                    p.setUser_id(resultSet.getInt("user_id"));
+                    p.setBlog_cate_id(resultSet.getInt("blog_cate_id"));
+                    p.setTitle(resultSet.getString("title"));
+                    p.setContext(resultSet.getString("content"));
+                    p.setCover_img(resultSet.getString("cover_img"));
+                    p.setMain_img(resultSet.getString("main_img"));
+                    p.setDescription(resultSet.getString("description"));
+                    p.setCreated_at(resultSet.getDate("created_at"));
+                    p.setModified_at(resultSet.getDate("modified_at"));
+                    BlogCategories blogCategory = new BlogCategoriesDAO().getByID(resultSet.getInt("blog_cate_id"));
+                    p.setBlogCategory(blogCategory);
+                    list.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     public Blog getByID(int id) {
         Blog blog = null;
         String query = "SELECT id, user_id, blog_cate_id, title, content, cover_img, main_img, description, created_at, modified_at FROM blogs WHERE id = ?";
@@ -183,6 +216,6 @@ public class BlogDAO extends DBContext {
 //
 //        }
 
-        System.out.println(bDAO.filterBlog("a", null));
+        System.out.println(bDAO.getAllBlog(2, 1));
     }
 }

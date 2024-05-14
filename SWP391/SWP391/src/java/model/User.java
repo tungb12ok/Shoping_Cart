@@ -22,6 +22,8 @@ public class User {
     private String telephone;
     private Date createdAt;
     private Date modifiedAt;
+    private boolean gender;
+    
     private UserStatus userStatus;
     private Roles role;
 
@@ -30,6 +32,14 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
     }
 
     public void setId(int id) {

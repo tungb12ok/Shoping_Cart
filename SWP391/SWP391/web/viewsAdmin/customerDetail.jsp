@@ -61,10 +61,10 @@
                         <div class="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-4 xl:col-span-3">
                             <div class="">
                                 <div class="text-center">
-                                    <img src="assets/images/users/avatar-1.png" alt="" class="rounded-full mx-auto inline-block">
+                                    <img src="viewsAdmin/assets/images/users/avatar-1.png" alt="" class="rounded-full mx-auto inline-block">
                                     <div class="my-4">                                                                        
-                                        <h5 class="text-xxl font-semibold text-slate-700 dark:text-gray-400">Merri Diamond</h5>
-                                        <span class="block  font-medium text-slate-500">New York, USA</span>
+                                        <h5 class="text-xxl font-semibold text-slate-700 dark:text-gray-400">${u.firstName} ${u.lastName}</h5>
+                                        <span class="block  font-medium text-slate-500">VN</span>
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-12 sm:grid-cols-12 md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-4">
@@ -72,19 +72,19 @@
                                         <span class="dark:text-slate-300">Email :</span>
                                     </div><!--end col-->
                                     <div class="col-span-12 sm:col-span-12 md:col-span-7">
-                                        <span class="dark:text-slate-400">example@gmail.com</span>
+                                        <span class="dark:text-slate-400">${u.email}</span>
                                     </div><!--end col-->
                                     <div class="col-span-12 sm:col-span-12 md:col-span-5 text-end">
                                         <span class="dark:text-slate-300">Phone :</span>
                                     </div><!--end col-->
                                     <div class="col-span-12 sm:col-span-12 md:col-span-7">
-                                        <span class="dark:text-slate-400">+1 234 567 89</span>
+                                        <span class="dark:text-slate-400">${u.telephone}</span>
                                     </div><!--end col-->
                                     <div class="col-span-12 sm:col-span-12 md:col-span-5 text-end">
-                                        <span class="dark:text-slate-300">Date of birth :</span>
+                                        <span class="dark:text-slate-300">Gender :</span>
                                     </div><!--end col-->
                                     <div class="col-span-12 sm:col-span-12 md:col-span-7">
-                                        <span class="dark:text-slate-400">05 June 2001</span>
+                                        <span class="dark:text-slate-400">${u.gender?"Male":"Female"}</span>
                                     </div><!--end col-->
                                     <div class="col-span-12 sm:col-span-12 md:col-span-5 text-end">
                                         <span class="dark:text-slate-300">Address :</span>
