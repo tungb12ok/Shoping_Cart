@@ -148,13 +148,15 @@
                                                                             ${u.id}
                                                                         </td>
                                                                         <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                                                            <div class="flex items-center">
-                                                                                <img src="assets/images/users/avatar-2.png" alt="" class="me-2 h-8 inline-block">
-                                                                                <div class="self-center">                                                                        
-                                                                                    <h5 class="text-sm font-semibold text-slate-700 dark:text-gray-400">${u.firstName} ${u.lastName}</h5>
-                                                                                    <span class="block  font-medium text-slate-500">Việt Nam</span>
+                                                                            <a href="customerDetail?id=${u.id}">
+                                                                                <div class="flex items-center">
+                                                                                    <img src="assets/images/users/avatar-2.png" alt="" class="me-2 h-8 inline-block">
+                                                                                    <div class="self-center">                                                                        
+                                                                                        <h5 class="text-sm font-semibold text-slate-700 dark:text-gray-400"><u>${u.firstName} ${u.lastName}</u></h5>
+                                                                                        <span class="block  font-medium text-slate-500">Việt Nam</span>
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
+                                                                            </a>
                                                                         </td>
                                                                         <td class="p-3 font-semibold text-lg text-gray-800 whitespace-nowrap dark:text-gray-400">
                                                                             ${u.gender?"Male":"Female"}
