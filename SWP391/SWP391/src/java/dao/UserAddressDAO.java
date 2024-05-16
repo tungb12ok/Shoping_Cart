@@ -57,6 +57,24 @@ public class UserAddressDAO extends DBContext {
         return userAddresses;
     }
 
+    public void updateUserAddress(UserAddress userAddress) {
+        String sql = "UPDATE user_address SET address_line = ?, city = ?, country = ? WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, userAddress.getAddressLine());
+            statement.setString(2, userAddress.getCity());
+            statement.setString(3, userAddress.getCountry());
+            statement.setInt(4, userAddress.getId());
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("No rows updated.");
+            } else {
+                System.out.println("User address updated successfully.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public UserAddress getUserAddressById(int addressId) {
         UserAddress userAddress = null;
         String sql = "SELECT id, user_id, address_line, city, country FROM user_address WHERE id = ?";
@@ -77,6 +95,7 @@ public class UserAddressDAO extends DBContext {
         }
         return userAddress;
     }
+
     public static void main(String[] args) {
         UserAddressDAO uaDAO = new UserAddressDAO();
         System.out.println(uaDAO.getUserAddressById(1));
