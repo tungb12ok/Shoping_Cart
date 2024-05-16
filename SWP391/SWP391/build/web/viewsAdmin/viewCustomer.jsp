@@ -93,6 +93,11 @@
                                                 <option  class="dark:text-slate-700">Russia</option>
                                             </select> 
                                         </div>
+                                        <a href="updateCustomer">
+                                            <div class="mb-2 w-36">
+                                                <button class="px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">Create Account</button>
+                                            </div>
+                                        </a>
                                         <div class="ms-auto">
                                             <form>
                                                 <div class="relative">
@@ -104,7 +109,6 @@
                                             </form>
                                         </div>
                                     </div>
-
                                     <div id="myTabContent">
                                         <div class="active  p-4 bg-gray-50 rounded-lg dark:bg-gray-800/40" id="all" role="tabpanel" aria-labelledby="all-tab">
                                             <div class="grid grid-cols-1 p-0 md:p-4">
@@ -170,7 +174,7 @@
                                                                             </c:if>
                                                                         </td>                                                                    
                                                                         <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                                                            <a href="customerDetail?id=${u.id}"><i class="icofont-ui-edit text-lg text-gray-500 dark:text-gray-400"></i></a>
+                                                                            <a href="updateCustomer?id=${u.id}"><i class="icofont-ui-edit text-lg text-gray-500 dark:text-gray-400"></i></a>
                                                                             <a href="#"><i class="icofont-ui-delete text-lg text-red-500 dark:text-red-400"></i></a>
                                                                         </td>
                                                                     </tr>
@@ -253,6 +257,6 @@
         <script src="viewsAdmin/assets/js/app.js"></script>
         <!-- JAVASCRIPTS -->
         <script src="${pageContext.request.contextPath}/js/dataTable.js"></script>
-      
+
     </body>
 </html>

@@ -26,7 +26,8 @@ public class User {
     
     private UserStatus userStatus;
     private Roles role;
-
+    private UserAddress userAddress;
+    
     public User() {
     }
 
@@ -132,6 +133,14 @@ public class User {
 
     public void setRole(Roles role) {
         this.role = role;
+    }
+
+    public UserAddress getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(UserAddress userAddress) {
+        this.userAddress = userAddress;
     }
 
     @Override
