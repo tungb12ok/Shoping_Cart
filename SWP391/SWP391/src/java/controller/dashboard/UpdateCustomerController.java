@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 import model.User;
 
@@ -50,6 +51,7 @@ public class UpdateCustomerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         // Retrieve form data
         String idRaw = request.getParameter("id");
         String firstName = request.getParameter("first_name");
@@ -82,11 +84,11 @@ public class UpdateCustomerController extends HttpServlet {
         if (idRaw.isBlank() || idRaw.isEmpty() || idRaw == null) {
             try {
                 uDAO.addUser(user);
-                request.setAttribute("mess", "Create User Success!");
+                session.setAttribute("messSusess", "Create User Success!");
                 response.sendRedirect("customerList");
                 return;
             } catch (Exception e) {
-                request.setAttribute("mess", "Create User Failed!");
+                session.setAttribute("messError", "Create User Failed!");
             }
         } else {
             User uUpdate = uDAO.getUserById(Integer.parseInt(idRaw));
@@ -97,17 +99,18 @@ public class UpdateCustomerController extends HttpServlet {
             uUpdate.setTelephone(telephone);
             uUpdate.setGender(gender);
             uUpdate.setRoleId(roleId);
+            uUpdate.setStatusId(satusId);
             uUpdate.setCreatedAt(new Date());
             uUpdate.setModifiedAt(new Date());
 
             try {
-                uDAO.updateUser(user);
-                request.setAttribute("mess", "Update User Success!");
+                uDAO.updateUser(uUpdate);
+                session.setAttribute("messSusess", "Update User Success!");
             } catch (Exception e) {
-                request.setAttribute("mess", "Update User Failed!");
+                session.setAttribute("messError", "Update User Failed!");
             }
         }
-        response.sendRedirect("updateCustomer?id" + idRaw);
+        response.sendRedirect("updateCustomer?id=" + idRaw);
 
     }
 }

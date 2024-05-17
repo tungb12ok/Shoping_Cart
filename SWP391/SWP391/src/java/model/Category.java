@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 
-public class Categories {
+public class Category {
     private int id;
     private int statusId;
     private String name;

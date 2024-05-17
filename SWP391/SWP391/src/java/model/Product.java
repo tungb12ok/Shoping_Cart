@@ -25,5 +25,5 @@ public class Product {
     private Brand brand;
     private Discount discount;
     private ProductStatus productStatus;
-    private Categories categories;
+    private Category categories;
 }

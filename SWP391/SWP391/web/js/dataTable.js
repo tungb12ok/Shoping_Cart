@@ -19,9 +19,13 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function sortTable(table, columnIndex, dataType, ascending) {
-    let rows = Array.from(table.getElementsByTagName("tr"));
+    let tbody = table.querySelector("tbody");
+    let tfoot = table.querySelector("tfoot");
+    let rows = Array.from(tbody.getElementsByTagName("tr"));
+    rows.push(...Array.from(tfoot.getElementsByTagName("tr"))); // Include footer rows
+
     let isNumber = dataType === "number";
-    rows.shift(); // Loại bỏ hàng tiêu đề
+    rows.shift(); // Remove the header row
 
     rows.sort(function (rowA, rowB) {
         let cellA = rowA.getElementsByTagName("td")[columnIndex].innerText;
@@ -32,9 +36,17 @@ function sortTable(table, columnIndex, dataType, ascending) {
             return cellA.localeCompare(cellB) * (ascending ? 1 : -1);
         }
     });
-    let tbody = table.querySelector("tbody");
+
+    // Remove all existing rows from tbody and tfoot
+    tbody.innerHTML = "";
+    tfoot.innerHTML = "";
+
     rows.forEach(function (row) {
-        tbody.appendChild(row);
+        if (row.parentNode === tbody) {
+            tbody.appendChild(row);
+        } else if (row.parentNode === tfoot) {
+            tfoot.appendChild(row);
+        }
     });
 }
 

@@ -17,9 +17,17 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.*;
 
 public class OrderDAO extends DBContext {
+
+    private UserDAO uDAO;
+
+    public OrderDAO() {
+        uDAO = new UserDAO();
+    }
 
     // Phương thức lấy Order theo id
     public Order getOrderById(int id) throws SQLException {
@@ -88,6 +96,9 @@ public class OrderDAO extends DBContext {
                 order.setRecipientPhone(resultSet.getString("recipient_phone"));
                 order.setCreatedAt(resultSet.getTimestamp("created_at"));
                 order.setModifiedAt(resultSet.getTimestamp("modified_at"));
+
+                order.setUser(uDAO.getUserById(order.getUserId()));
+                order.setOrderStatus(getStatusById(order.getStatusId()));
                 orders.add(order);
             }
         }
@@ -196,6 +207,75 @@ public class OrderDAO extends DBContext {
             statement.setDouble(4, orderDetail.getPrice());
             statement.setInt(5, orderDetail.getId());
             statement.executeUpdate();
+        }
+    }
+    // Method to retrieve all order statuses
+
+    public List<OrderStatus> getAllStatus() throws SQLException {
+        List<OrderStatus> statuses = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            String query = "SELECT id, name FROM order_status";
+            preparedStatement = connection.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                OrderStatus status = new OrderStatus();
+                status.setId(resultSet.getInt("id"));
+                status.setName(resultSet.getString("name"));
+                statuses.add(status);
+            }
+        } finally {
+            // Close resources
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+
+        return statuses;
+    }
+
+    // Method to retrieve order status by ID
+    public OrderStatus getStatusById(int id) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        OrderStatus status = null;
+
+        try {
+            String query = "SELECT id, name FROM order_status WHERE id = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                status = new OrderStatus();
+                status.setId(resultSet.getInt("id"));
+                status.setName(resultSet.getString("name"));
+            }
+        } finally {
+            // Close resources
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+
+        return status;
+    }
+
+    public static void main(String[] args) {
+        OrderDAO oDAO = new OrderDAO();
+        try {
+            System.out.println(oDAO.getAllOrders());
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

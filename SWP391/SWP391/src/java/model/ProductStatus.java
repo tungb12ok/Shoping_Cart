@@ -6,6 +6,7 @@ package model;
 
 import lombok.*;
 
+@Data
 public class ProductStatus {
     private int id;
     private String name;
