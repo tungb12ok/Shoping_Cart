@@ -42,6 +42,7 @@ SWP391/SWP391/nbproject/build-impl.xml
 SWP391/SWP391/nbproject/genfiles.properties
 SWP391/SWP391/nbproject/project.properties
 SWP391/SWP391/nbproject/project.xml
+<<<<<<< HEAD
 *.properties
 SWP391/SWP391/build/web/components/pagination.jsp
 SWP391/SWP391/build/web/js/dataTable.js
@@ -56,3 +57,6 @@ SWP391/SWP391/nbproject/genfiles.properties
 SWP391/SWP391/nbproject/private/private.xml
 SWP391/SWP391/nbproject/project.properties
 SWP391/SWP391/nbproject/project.xml
+*.xml
+=======
+>>>>>>> parent of 111829d (Update Full)

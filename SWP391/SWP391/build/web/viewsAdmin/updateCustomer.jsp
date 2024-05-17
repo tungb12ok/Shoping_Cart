@@ -38,6 +38,18 @@
                                     <div class="flex flex-wrap justify-between">
                                         <div class="items-center ">
                                             <h1 class="font-medium text-3xl block dark:text-slate-100">Update Customer</h1>
+                                            <h1 class="font-medium text-3xl block dark:text-slate-100">
+                                                <c:if test="${not empty messSuccess}">
+                                                    ${messSuccess}
+                                                    <c:set var="messSuccess" value="${null}" scope="session" />
+                                                </c:if>
+
+                                                <c:if test="${not empty messError}">
+                                                    ${messError}
+                                                    <c:set var="messError" value="${null}" scope="session" />
+                                                </c:if>
+                                            </h1>
+
                                             <ol class="list-reset flex text-sm">
                                                 <li><a href="#" class="text-gray-500 dark:text-slate-400">Robotech</a></li>
                                                 <li><span class="text-gray-500 dark:text-slate-400 mx-2">/</span></li>

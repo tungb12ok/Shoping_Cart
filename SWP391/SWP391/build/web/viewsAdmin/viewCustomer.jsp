@@ -104,7 +104,7 @@
                                                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                                         <i data-lucide="search" class="z-[1] w-5 h-5 stroke-slate-400"></i>
                                                     </div>
-                                                    <input type="search" id="productSearch" class="form-input w-52 rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500  dark:hover:border-slate-700 pl-10 p-2.5" placeholder="search">
+                                                    <input type="search" id="productSearch" onkeyup="searchTable()" class="form-input w-52 rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700 pl-10 p-2.5" placeholder="search">
                                                 </div>
                                             </form>
                                         </div>
@@ -131,6 +131,12 @@
                                                                     </th>
                                                                     <th scope="col" data-sort="number" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                         PhoneNumber
+                                                                    </th>
+                                                                    <th scope="col" data-sort="number" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
+                                                                        CreateAt
+                                                                    </th>
+                                                                    <th scope="col" data-sort="number" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
+                                                                        ModifiedAt
                                                                     </th>
                                                                     <th scope="col" data-sort="text" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                         Status
@@ -168,10 +174,16 @@
                                                                             ${u.telephone}
                                                                         </td>
                                                                         <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                                                            <c:if test="${u.statusId == 1}">
+                                                                            ${u.createdAt}
+                                                                        </td>
+                                                                        <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                                            ${u.modifiedAt}
+                                                                        </td>
+                                                                        <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                                            <c:if test="${u.getUserStatus().name ==  'Active'}">
                                                                                 <span class="bg-green-600/5 text-green-600 text-[11px] font-medium px-2.5 py-0.5 rounded h-5">Active</span>
                                                                             </c:if>
-                                                                            <c:if test="${u.statusId != 1}">
+                                                                            <c:if test="${u.getUserStatus().name !=  'Active'}">
                                                                                 <span class="bg-red-600/5 text-red-600 text-[11px] font-medium px-2.5 py-0.5 rounded h-5">InActive</span>
                                                                             </c:if>
                                                                         </td>                                                                    
@@ -188,32 +200,7 @@
                                                 </div><!--end div-->
                                             </div><!--end grid-->
                                             <div class="flex justify-between mt-4">
-                                                <div class="self-center">
-                                                    <p class="dark:text-slate-400">Showing 1 - 20 of 1,524</p>
-                                                </div>
-                                                <div class="self-center">
-                                                    <ul class="inline-flex items-center -space-x-px">
-                                                        <li>
-                                                            <a href="#" class=" py-2 px-3 ms-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                                                <i class="icofont-simple-left"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" aria-current="page" class="z-10 py-2 px-3 leading-tight text-brand-600 bg-brand-50 border border-brand-300 hover:bg-brand-100 hover:text-brand-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">2</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">3</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" class=" py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                                                <i class="icofont-simple-right"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                <jsp:include page="components/pagination.jsp"/>
                                             </div>
                                         </div>
                                     </div>
@@ -258,7 +245,7 @@
         <script src="viewsAdmin/assets/js/pages/analytics-index.init.js"></script>
         <script src="viewsAdmin/assets/js/app.js"></script>
         <!-- JAVASCRIPTS -->
-        <script src="${pageContext.request.contextPath}/js/dataTable.js"></script>
+        <script src="${pageContext.request.contextPath}/viewsAdmin/assets/js/dataTable.js"></script>
 
     </body>
 </html>

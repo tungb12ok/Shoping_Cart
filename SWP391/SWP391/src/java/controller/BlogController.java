@@ -50,7 +50,6 @@ public class BlogController extends HttpServlet {
             request.setAttribute("paramCate", cate);
             request.setAttribute("listBlog", bDAO.filterBlog(search, null, Integer.parseInt(cate)));
         }
-
         // start pagging
         int limitPage = 1;
         if (request.getParameter("cp") == null) {

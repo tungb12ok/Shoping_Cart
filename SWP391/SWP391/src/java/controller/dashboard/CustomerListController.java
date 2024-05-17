@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import model.Blog;
 import model.Pagination;
 import model.User;
 
@@ -24,15 +23,17 @@ import model.User;
  */
 @WebServlet(name = "CustomerListController", urlPatterns = {"/customerList"})
 public class CustomerListController extends HttpServlet {
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          UserDAO uDAO = new UserDAO();
+        UserDAO uDAO = new UserDAO();
+
+        request.setAttribute("listUser", uDAO.getAllUsers());
         List<User> list = uDAO.getAllUsers();
         HttpSession session = request.getSession();
-         // start pagging
-        int limitPage = 1;
+        // start pagging
+        int limitPage = 10;
         if (request.getParameter("cp") == null) {
             Pagination Page = new Pagination(list, limitPage, 1);
             Pagination<User> pagination = new Pagination<>(list, limitPage, 1);

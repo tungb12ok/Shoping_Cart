@@ -76,23 +76,23 @@
                                         </ul>
                                     </div>
                                     <div class="flex flex-wrap gap-4 mb-3">
-                                        <!--                                        <div class="mb-2 w-44">                                           
-                                                                                    <select id="Category" class="w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500  dark:hover:border-slate-700">
-                                                                                        <option  class="dark:text-slate-700">All Category</option>
-                                                                                        <option  class="dark:text-slate-700">Electronics</option>
-                                                                                        <option  class="dark:text-slate-700">Furniture</option>
-                                                                                        <option  class="dark:text-slate-700">Footwear</option>
-                                                                                        <option  class="dark:text-slate-700">Clothes</option>
-                                                                                    </select> 
-                                                                                </div>
-                                                                                <div class="mb-2 w-36">
-                                                                                    <select id="Country" class="w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500  dark:hover:border-slate-700">
-                                                                                        <option  class="dark:text-slate-700">All Country</option>
-                                                                                        <option  class="dark:text-slate-700">USA</option>
-                                                                                        <option  class="dark:text-slate-700">India</option>
-                                                                                        <option  class="dark:text-slate-700">Russia</option>
-                                                                                    </select> 
-                                                                                </div>-->
+                                        <div class="mb-2 w-44">                                           
+                                            <select id="Category" class="w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500  dark:hover:border-slate-700">
+                                                <option  class="dark:text-slate-700">All Category</option>
+                                                <option  class="dark:text-slate-700">Electronics</option>
+                                                <option  class="dark:text-slate-700">Furniture</option>
+                                                <option  class="dark:text-slate-700">Footwear</option>
+                                                <option  class="dark:text-slate-700">Clothes</option>
+                                            </select> 
+                                        </div>
+                                        <div class="mb-2 w-36">
+                                            <select id="Country" class="w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500  dark:hover:border-slate-700">
+                                                <option  class="dark:text-slate-700">All Country</option>
+                                                <option  class="dark:text-slate-700">USA</option>
+                                                <option  class="dark:text-slate-700">India</option>
+                                                <option  class="dark:text-slate-700">Russia</option>
+                                            </select> 
+                                        </div>
                                         <a href="updateCustomer">
                                             <div class="mb-2 w-36">
                                                 <button class="px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">Create Account</button>
@@ -245,8 +245,7 @@
         <script src="viewsAdmin/assets/js/pages/analytics-index.init.js"></script>
         <script src="viewsAdmin/assets/js/app.js"></script>
         <!-- JAVASCRIPTS -->
-        <script src="${pageContext.request.contextPath}/viewsAdmin/assets/js/dateTable.js"></script>
-        <script src="${pageContext.request.contextPath}/js/validateForm.js"></script>
+        <script src="${pageContext.request.contextPath}/viewsAdmin/assets/js/dataTable.js"></script>
 
     </body>
 </html>
