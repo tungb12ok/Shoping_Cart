@@ -43,9 +43,11 @@ public class BlogController extends HttpServlet {
         session.setAttribute("listCate", blogCDAO.getAll());
         session.setAttribute("listLastBlog", bDAO.getAllBlog(3));
         if (search != null) {
+            request.setAttribute("paramSearch", search);
             request.setAttribute("listBlog", bDAO.filterBlog(search, null, null));
         }
         if (cate != null) {
+            request.setAttribute("paramCate", cate);
             request.setAttribute("listBlog", bDAO.filterBlog(search, null, Integer.parseInt(cate)));
         }
 

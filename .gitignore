@@ -42,3 +42,17 @@ SWP391/SWP391/nbproject/build-impl.xml
 SWP391/SWP391/nbproject/genfiles.properties
 SWP391/SWP391/nbproject/project.properties
 SWP391/SWP391/nbproject/project.xml
+*.properties
+SWP391/SWP391/build/web/components/pagination.jsp
+SWP391/SWP391/build/web/js/dataTable.js
+SWP391/SWP391/build/web/myOrder.jsp
+SWP391/SWP391/build/web/viewsAdmin/assets/js/dateTable.js
+SWP391/SWP391/build/web/viewsAdmin/components/notification.jsp
+SWP391/SWP391/build/web/viewsAdmin/components/pagination.jsp
+SWP391/SWP391/build/web/viewsAdmin/updateCustomer.jsp
+SWP391/SWP391/build/web/viewsAdmin/viewCustomer.jsp
+SWP391/SWP391/nbproject/build-impl.xml
+SWP391/SWP391/nbproject/genfiles.properties
+SWP391/SWP391/nbproject/private/private.xml
+SWP391/SWP391/nbproject/project.properties
+SWP391/SWP391/nbproject/project.xml

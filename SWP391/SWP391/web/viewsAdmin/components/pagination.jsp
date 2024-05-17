@@ -1,6 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="text-center col-md-6 mt-5" style="margin-left: 0%">
+
+<!-- Include Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<div class="text-center col-md-6 mt-5" style="margin-left: 40%">
     <nav class="text-center" aria-label="Page navigation example">
         <ul class="pagination text-center" style="margin-left: 6%;">
             <c:choose>
