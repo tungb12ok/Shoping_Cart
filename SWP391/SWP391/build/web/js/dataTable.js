@@ -2,7 +2,7 @@ let currentSortColumnIndex = -1;
 let sortAscending = true;
 
 document.addEventListener("DOMContentLoaded", function () {
-    let table = document.getElementById("userTable");
+    let table = document.getElementById("tableFilter");
     let ths = table.querySelectorAll("th[data-sort]");
     ths.forEach(function (th, index) {
         th.addEventListener("click", function () {

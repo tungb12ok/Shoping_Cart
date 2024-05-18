@@ -48,6 +48,9 @@ public class OrderDAO extends DBContext {
                     order.setRecipientPhone(resultSet.getString("recipient_phone"));
                     order.setCreatedAt(resultSet.getTimestamp("created_at"));
                     order.setModifiedAt(resultSet.getTimestamp("modified_at"));
+                    
+                    order.setOrderStatus(getStatusById(order.getStatusId()));
+                    order.setUser(new UserDAO().getUserById(order.getUserId()));
                 }
             }
         }
@@ -168,6 +171,8 @@ public class OrderDAO extends DBContext {
                     orderDetail.setPrice(resultSet.getDouble("price"));
                     orderDetail.setCreatedAt(resultSet.getTimestamp("created_at"));
                     orderDetail.setModifiedAt(resultSet.getTimestamp("modified_at"));
+                    
+                    orderDetail.setProduct(new ProductDAO().getProductById(orderDetail.getProductId()));
                     orderDetails.add(orderDetail);
                 }
                 statement.close();
@@ -273,7 +278,9 @@ public class OrderDAO extends DBContext {
     public static void main(String[] args) {
         OrderDAO oDAO = new OrderDAO();
         try {
-            System.out.println(oDAO.getAllOrders());
+//            System.out.println(oDAO.getOrderDetailsByOrderId(3));
+            OrderDetail o = oDAO.getOrderDetailsByOrderId(3).get(0);
+            System.out.println(o.getProduct().getName());
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
