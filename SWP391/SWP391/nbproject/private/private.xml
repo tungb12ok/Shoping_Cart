@@ -3,17 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Workspace/SP_SWP/ShoppingCart/SWP391/SWP391/web/viewsAdmin/customerDetail.jsp</file>
-            <file>file:/D:/Workspace/SP_SWP/ShoppingCart/SWP391/SWP391/src/java/controller/dashboard/UpdateCustomerController.java</file>
             <file>file:/D:/Workspace/SP_SWP/ShoppingCart/SWP391/SWP391/web/viewsAdmin/viewCustomer.jsp</file>
-            <file>file:/D:/Workspace/SP_SWP/ShoppingCart/SWP391/SWP391/src/java/model/Blog.java</file>
-            <file>file:/D:/Workspace/SP_SWP/ShoppingCart/SWP391/SWP391/web/blog.jsp</file>
-            <file>file:/D:/Workspace/SP_SWP/ShoppingCart/SWP391/SWP391/web/viewsAdmin/updateCustomer.jsp</file>
-            <file>file:/D:/Workspace/SP_SWP/ShoppingCart/SWP391/SWP391/src/java/dao/BlogCategoriesDAO.java</file>
-            <file>file:/D:/Workspace/SP_SWP/ShoppingCart/SWP391/SWP391/src/java/dao/UserAddressDAO.java</file>
-            <file>file:/D:/Workspace/SP_SWP/ShoppingCart/SWP391/SWP391/src/java/model/User.java</file>
-            <file>file:/D:/Workspace/SP_SWP/ShoppingCart/SWP391/SWP391/src/java/dao/BlogDAO.java</file>
-            <file>file:/D:/Workspace/SP_SWP/ShoppingCart/SWP391/SWP391/src/java/dao/UserDAO.java</file>
+            <file>file:/D:/Workspace/SP_SWP/ShoppingCart/SWP391/SWP391/web/components/pagination.jsp</file>
+            <file>file:/D:/Workspace/SP_SWP/ShoppingCart/SWP391/SWP391/src/java/controller/BlogController.java</file>
+            <file>file:/D:/Workspace/SP_SWP/ShoppingCart/SWP391/SWP391/src/java/controller/dashboard/CustomerListController.java</file>
+            <file>file:/D:/Workspace/SP_SWP/ShoppingCart/SWP391/SWP391/web/viewsAdmin/components/pagination.jsp</file>
         </group>
     </open-files>
 </project-private>

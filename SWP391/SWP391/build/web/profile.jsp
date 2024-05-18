@@ -42,72 +42,73 @@
 
             <jsp:include page="components/header.jsp" />
             <jsp:include page="components/notification.jsp" />
-            
-            <div class="container mt-5">
-                <form id="profileForm" action="myProfile" method="post">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="firstName" class="form-label">First Name:</label>
-                                <input type="text" id="firstName" name="firstName" class="form-control" value="${profile.firstName}" required>
-                            </div>
-                        </div>  
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="lastName" class="form-label">Last Name:</label>
-                                <input type="text" id="lastName" name="lastName" class="form-control" value="${profile.lastName}" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="email" class="form-label">Email:</label>
-                                <input type="email" id="email" readonly="" disabled="" name="email" class="form-control" value="${profile.email}" required>
+            <main class="bg_gray">
+                <div class="container mt-5">
+                    <form id="profileForm" action="myProfile" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="firstName" class="form-label">First Name:</label>
+                                    <input type="text" id="firstName" name="firstName" class="form-control" value="${profile.firstName}" required>
+                                </div>
+                            </div>  
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="lastName" class="form-label">Last Name:</label>
+                                    <input type="text" id="lastName" name="lastName" class="form-control" value="${profile.lastName}" required>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="address" class="form-label">Address:</label>
-                                <input type="text" id="address" name="address" class="form-control" value="${profile.getUserAddress().addressLine}" required>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email:</label>
+                                    <input type="email" id="email" readonly="" disabled="" name="email" class="form-control" value="${profile.email}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="address" class="form-label">Address:</label>
+                                    <input type="text" id="address" name="address" class="form-control" value="${profile.getUserAddress().addressLine}" required>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="city" class="form-label">City:</label>
-                                <input type="text" id="city" name="city" class="form-control" value="${profile.getUserAddress().city}" required>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="city" class="form-label">City:</label>
+                                    <input type="text" id="city" name="city" class="form-control" value="${profile.getUserAddress().city}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="country" class="form-label">Country:</label>
+                                    <input type="text" id="country" name="country" class="form-control" value="${profile.getUserAddress().country}" required>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="country" class="form-label">Country:</label>
-                                <input type="text" id="country" name="country" class="form-control" value="${profile.getUserAddress().country}" required>
-                            </div>
-                        </div>
-                    </div>
 
 
-                    <button type="submit" class="btn btn-primary">Update Profile</button>
-                </form>
-                <h2 class="mt-5">Change Password</h2>
-                <form id="passwordForm" onsubmit="return validatePassword()" method="post" action="changePassword">
-                    <div class="form-group">
-                        <label for="currentPassword" class="form-label">Current Password:</label>
-                        <input type="password" id="currentPassword" name="currentPassword" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="newPassword" class="form-label">New Password:</label>
-                        <input type="password" id="newPassword" name="newPassword" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword" class="form-label">Confirm New Password:</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Change Password</button>
-                </form>
-            </div>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
+                    <h2 class="mt-5">Change Password</h2>
+                    <form id="passwordForm" onsubmit="return validatePassword()" method="post" action="changePassword">
+                        <div class="form-group">
+                            <label for="currentPassword" class="form-label">Current Password:</label>
+                            <input type="password" id="currentPassword" name="currentPassword" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword" class="form-label">New Password:</label>
+                            <input type="password" id="newPassword" name="newPassword" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword" class="form-label">Confirm New Password:</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </form>
+                </div>
+            </main>
             <jsp:include page="components/footer.jsp" />
 
 
