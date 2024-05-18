@@ -104,7 +104,7 @@
                                                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                                         <i data-lucide="search" class="z-[1] w-5 h-5 stroke-slate-400"></i>
                                                     </div>
-                                                    <input type="search" id="productSearch" onkeyup="searchTable()" class="form-input w-52 rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700 pl-10 p-2.5" placeholder="search">
+                                                    <input type="search" id="searchTable" onkeyup="searchTable()" class="form-input w-52 rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700 pl-10 p-2.5" placeholder="search">
                                                 </div>
                                             </form>
                                         </div>
@@ -114,7 +114,7 @@
                                             <div class="grid grid-cols-1 p-0 md:p-4">
                                                 <div class="sm:-mx-6 lg:-mx-8">
                                                     <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
-                                                        <table id="userTable" class="w-full">
+                                                        <table id="tableFilter" class="w-full">
                                                             <thead class="bg-gray-50 dark:bg-gray-700/20">
                                                                 <tr>
                                                                     <th scope="col" data-sort="number" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">

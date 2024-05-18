@@ -46,13 +46,13 @@
             <div class="container mt-6">
                 <div class="input-group">
                     <form action="myOrder">
-                        <input type="text" class="form-control" placeholder="Search...">
+                        <input type="text" id="searchTable" onkeyup="searchTable()" class="form-control" placeholder="Search...">
                     </form>
                 </div>
             </div>
             <div class="container">
 
-                <table id="userTable" class="table table-bordered">
+                <table id="tableFilter" class="table table-bordered">
                     <thead class="thead-dark bg-primary text-white">
                         <tr>
                             <th data-sort="text">ID</th>

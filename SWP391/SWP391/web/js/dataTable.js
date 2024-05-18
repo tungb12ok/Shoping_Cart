@@ -59,3 +59,25 @@ function updateSortIndicator(th) {
     }
     indicator.innerHTML = sortAscending ? "&#9660;" : "&#9650;";
 }
+function searchTable() {
+    const input = document.getElementById('searchTable');
+    const filter = input.value.toLowerCase();
+    const table = document.getElementById('tableFilter');
+    const trs = table.getElementsByTagName('tr');
+
+    for (let i = 1; i < trs.length; i++) { // Start from 1 to skip the header row
+        const tds = trs[i].getElementsByTagName('td');
+        let showRow = false;
+
+        for (let j = 0; j < tds.length; j++) {
+            const td = tds[j];
+            if (td) {
+                if (td.textContent.toLowerCase().indexOf(filter) > -1) {
+                    showRow = true;
+                    break;
+                }
+            }
+        }
+        trs[i].style.display = showRow ? '' : 'none';
+    }
+}
