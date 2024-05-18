@@ -223,18 +223,7 @@ public class BlogDAO extends DBContext {
 
     public static void main(String[] args) {
         BlogDAO bDAO = new BlogDAO();
-        Map<BlogCategories, List<Blog>> blogMap = bDAO.getBlogsByCategory();
-
-        System.out.println(blogMap.size());
-
-        for (Map.Entry<BlogCategories, List<Blog>> entry : blogMap.entrySet()) {
-            BlogCategories category = entry.getKey();
-            List<Blog> blogs = entry.getValue();
-
-            System.out.println("Category: " + category.getName());
-            System.out.println("Size: " + blogs.size());
-
-        }
+        System.out.println(bDAO.filterBlog("aaa", null, null).size());
 
     }
 }

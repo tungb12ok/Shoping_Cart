@@ -44,11 +44,11 @@ public class BlogController extends HttpServlet {
         session.setAttribute("listLastBlog", bDAO.getAllBlog(3));
         if (search != null) {
             request.setAttribute("paramSearch", search);
-            request.setAttribute("listBlog", bDAO.filterBlog(search, null, null));
+            list = bDAO.filterBlog(search, null, null);
         }
         if (cate != null) {
             request.setAttribute("paramCate", cate);
-            request.setAttribute("listBlog", bDAO.filterBlog(search, null, Integer.parseInt(cate)));
+            list = bDAO.filterBlog(search, null, Integer.parseInt(cate));
         }
         // start pagging
         int limitPage = 1;
