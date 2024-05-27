@@ -60,54 +60,87 @@ public class UserDAO extends DBContext {
     }
 
     public List<User> filterCustomersByStatusAndSearch(Integer status, String searchTerm) {
-        List<User> users = new ArrayList<>();
-        String sql = "SELECT id, email, password, role_id, status_id, first_name, last_name, telephone, created_at, modified_at, gender FROM users WHERE (status_id = ? OR ? IS NULL) AND ((first_name LIKE ? OR last_name LIKE ? OR email LIKE ? OR telephone LIKE ?) OR ? IS NULL)";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            if (status != null) {
-                statement.setInt(1, status);
-                statement.setInt(6, status);
-            } else {
-                statement.setNull(1, java.sql.Types.INTEGER);
-                statement.setNull(6, java.sql.Types.INTEGER);
-            }
-            if (searchTerm != null) {
-                statement.setString(3, "%" + searchTerm + "%");
-                statement.setString(4, "%" + searchTerm + "%");
-                statement.setString(5, "%" + searchTerm + "%");
-                statement.setString(6, "%" + searchTerm + "%");
-            } else {
-                statement.setNull(3, java.sql.Types.VARCHAR);
-                statement.setNull(4, java.sql.Types.VARCHAR);
-                statement.setNull(5, java.sql.Types.VARCHAR);
-                statement.setNull(6, java.sql.Types.VARCHAR);
-            }
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    User user = new User();
-                    user.setId(resultSet.getInt("id"));
-                    user.setEmail(resultSet.getString("email"));
-                    user.setPassword(resultSet.getString("password"));
-                    user.setRoleId(resultSet.getInt("role_id"));
-                    user.setStatusId(resultSet.getInt("status_id"));
-                    user.setFirstName(resultSet.getString("first_name"));
-                    user.setLastName(resultSet.getString("last_name"));
-                    user.setTelephone(resultSet.getString("telephone"));
-                    user.setGender(resultSet.getBoolean("gender"));
-                    user.setCreatedAt(resultSet.getDate("created_at"));
-                    user.setModifiedAt(resultSet.getDate("modified_at"));
-
-                     user.setRole(getRoleById(user.getRoleId()));
-                user.setUserStatus(getUserStatusById(user.getStatusId()));
-                    user.setUserAddress(uaDAO.getUserAddressById(user.getId()));
-                    users.add(user);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Xử lý ngoại lệ, có thể throw hoặc log
+    List<User> users = new ArrayList<>();
+    String sql = "SELECT id, email, password, role_id, status_id, first_name, last_name, telephone, created_at, modified_at, gender " +
+                 "FROM users " +
+                 "WHERE role_id = 1 AND " +
+                 "(status_id = ? OR ? IS NULL) AND " +
+                 "(" +
+                 "    (first_name LIKE ? OR last_name LIKE ? OR email LIKE ? OR telephone LIKE ?) OR " +
+                 "    (first_name LIKE ? AND last_name LIKE ?) OR " +
+                 "    ? IS NULL" +
+                 ")";
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        // Setting parameters for status
+        if (status != null) {
+            statement.setInt(1, status);
+            statement.setInt(2, status);
+        } else {
+            statement.setNull(1, java.sql.Types.INTEGER);
+            statement.setNull(2, java.sql.Types.INTEGER);
         }
-        return users;
+
+        // Setting parameters for search term
+        if (searchTerm != null && !searchTerm.isEmpty()) {
+            String searchPattern = "%" + searchTerm + "%";
+            statement.setString(3, searchPattern);
+            statement.setString(4, searchPattern);
+            statement.setString(5, searchPattern);
+            statement.setString(6, searchPattern);
+            
+            // Handle full name search by splitting searchTerm
+            String[] nameParts = searchTerm.split("\\s+");
+            if (nameParts.length == 2) {
+                String firstNamePart = "%" + nameParts[0] + "%";
+                String lastNamePart = "%" + nameParts[1] + "%";
+                statement.setString(7, firstNamePart);
+                statement.setString(8, lastNamePart);
+            } else {
+                statement.setString(7, searchPattern);
+                statement.setString(8, searchPattern);
+            }
+
+            statement.setString(9, searchPattern);
+        } else {
+            statement.setNull(3, java.sql.Types.VARCHAR);
+            statement.setNull(4, java.sql.Types.VARCHAR);
+            statement.setNull(5, java.sql.Types.VARCHAR);
+            statement.setNull(6, java.sql.Types.VARCHAR);
+            statement.setNull(7, java.sql.Types.VARCHAR);
+            statement.setNull(8, java.sql.Types.VARCHAR);
+            statement.setNull(9, java.sql.Types.VARCHAR);
+        }
+
+        // Execute query and process results
+        try (ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
+                user.setRoleId(resultSet.getInt("role_id"));
+                user.setStatusId(resultSet.getInt("status_id"));
+                user.setFirstName(resultSet.getString("first_name"));
+                user.setLastName(resultSet.getString("last_name"));
+                user.setTelephone(resultSet.getString("telephone"));
+                user.setGender(resultSet.getBoolean("gender"));
+                user.setCreatedAt(resultSet.getDate("created_at"));
+                user.setModifiedAt(resultSet.getDate("modified_at"));
+
+                user.setRole(getRoleById(user.getRoleId()));
+                user.setUserStatus(getUserStatusById(user.getStatusId()));
+                user.setUserAddress(uaDAO.getUserAddressById(user.getId()));
+
+                users.add(user);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        // Handle exceptions, could log or rethrow
     }
+    return users;
+}
+
 
     public User getUserById(int userId) {
         User user = null;
@@ -267,22 +300,8 @@ public class UserDAO extends DBContext {
     }
 
     public static void main(String[] args) {
-//        // Sample data
-        User newUser = new User();
-        newUser.setEmail("john.doe@example.com");
-        newUser.setPassword("password123");
-        newUser.setRoleId(1); // Assuming role_id 1 represents a certain role
-        newUser.setStatusId(1); // Assuming status_id 1 represents a certain status
-        newUser.setFirstName("John");
-        newUser.setLastName("Doe");
-        newUser.setTelephone("1234567890");
-        newUser.setCreatedAt(new Date()); // Assuming current date/time as created_at
-        newUser.setModifiedAt(new Date()); // Assuming current date/time as modified_at
-        newUser.setGender(true); // Assuming true represents male
-
-        // Test addUser method
         UserDAO uDAO = new UserDAO(); // Assuming you have a UserDAO class that contains the addUser method
-        uDAO.addUser(newUser);
+        System.out.println(uDAO.filterCustomersByStatusAndSearch(null, "John Doe").size());
     }
 
 }
