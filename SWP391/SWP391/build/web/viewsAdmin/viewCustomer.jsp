@@ -99,12 +99,12 @@
                                             </div>
                                         </a>
                                         <div class="ms-auto">
-                                            <form>
+                                            <form method="get" action="customerList">
                                                 <div class="relative">
                                                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                                         <i data-lucide="search" class="z-[1] w-5 h-5 stroke-slate-400"></i>
                                                     </div>
-                                                    <input type="search" id="searchTable" onkeyup="searchTable()" class="form-input w-52 rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700 pl-10 p-2.5" placeholder="search">
+                                                    <input type="search" value="${search}" name="search" id="searchTable" onkeyup="searchTable()" class="form-input w-52 rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700 pl-10 p-2.5" placeholder="search">
                                                 </div>
                                             </form>
                                         </div>
